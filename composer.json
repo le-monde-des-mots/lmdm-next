@@ -1,0 +1,25 @@
+{
+    "name": "ericl/lmdm-next",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "LmdmNext\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eric Laugier",
+            "email": "eric.laugier@egen.guru"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "slim/twig-view": "^3.3",
+        "alexanderpas/http-enum": "^1.0",
+        "ext-json": "*",
+        "doctrine/orm": "^2.16",
+        "php-di/php-di": "^7.0",
+        "monolog/monolog": "^3.5"
+    }
+}
