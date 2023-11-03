@@ -11,7 +11,7 @@ class OidcRouter implements OidcRouterInterface
 
     public function __invoke(RouteCollectorProxy $group): void
     {
-        $group->get("/authorize", $this->authorizeEndPoint);;
+        $group->get("/authorize", $this->authorizeEndPoint);
     }
 
     public function __construct(private AuthorizeEndPointInterface $authorizeEndPoint)

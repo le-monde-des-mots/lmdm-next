@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <title>Le Monde des Mots - {% block page_title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/css/minstyle.io.min.css">
+    <script type="text/javascript" src="/js/dark.min.js"></script>
+</head>
+<body>
+<div class="d-flex flex-column">
+    <div class="d-flex flex-row justify-content-between">
+    {% block title %}{% endblock %}
+    </div>
+    <div class="d-flex flex-row justify-content-around">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+</body>
+</html>

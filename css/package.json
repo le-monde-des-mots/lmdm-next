@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dark-mode-switcher": "^0.0.1",
+    "minstyle.io": "^2.0.2"
+  }
+}

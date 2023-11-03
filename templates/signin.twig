@@ -1,0 +1,40 @@
+{% extends "base.twig" %}
+{% block page_title %}Connexion{% endblock %}
+{% block title %}
+    <div class="p-2">
+    </div>
+    <div class="p-4">
+        <h1 class="text-center">Le Monde des Mots</h1>
+    </div>
+    <div class="p-2p">
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="p-2">
+    </div>
+    <div class="p-4">
+        <form action="{{ url_for("signinPost") }}" method="post">
+            <div class="mb-3">
+                <label for="exampleInputUsername1" class="form-label">Utilisateur</label>
+                <input type="text" class="form-control" id="exampleInputUsername1" name="username" aria-describedby="usernameHelp">
+                <div id="emailHelp" class="form-text">Eviter de partager votre nom d'utilisateur avec d'autres personnes.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1"  class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remenber_me">
+                <label class="form-check-label" for="exampleCheck1">Souvenez-vous de moi</label>
+            </div>
+            <input type="hidden" name="client_id" value="{{ client_id }}">
+            <input type="hidden" name="redirect_uri" value="{{ redirect_uri }}">
+            <input type="hidden" name="code_challenge" value="{{ code_challenge }}">
+            <input type="hidden" name="state" value="{{ state }}">
+            <input type="hidden" name="scope" value="{{ scope }}">
+            <button type="submit" class="btn btn-primary">Connexion</button>
+        </form>
+    </div>
+    <div class="p-2p">
+    </div>
+{% endblock %}

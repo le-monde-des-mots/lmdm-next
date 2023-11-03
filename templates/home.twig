@@ -1,11 +1,21 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>LMDM Backend Server</title>
+{% extends "base.twig" %}
+{% block page_title %}Backend Server{% endblock %}
+{% block title %}
 
-</head>
-<body>
-<h1>LMDM Backend Server is alive!</h1>
-</body>
-</html>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid ms-hero">
+        <div class="ms-hero-body">
+            <h1 class="ms-hero-title">Le Monde des Mots</h1>
+            <div class="ms-hero-subtitle">
+                <h3>Bienvenue</h3>
+            </div>
+            <div class="ms-hero-content">
+                <p>
+                    Bienvenue sur le serveur dorsal du site "Le Monde des Mots"<br/>
+                </p>
+                <div class="ms-btn">Documentation</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

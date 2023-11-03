@@ -1,18 +1,46 @@
 version: '3.7'
+secrets:
+  lmdmdb_root_pwd:
+    file: secrets/lmdmdb_root_pwd
+  lmdmdb_user_pwd:
+    file: secrets/lmdmdb_user_pwd
 
 volumes:
   logs:
     driver: local
+  lmdmdb:
 
 services:
-  slim:
-    image: php:8-alpine
+  adminer:
+    image: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: lmdmdb
+    ports:
+      - 8080:8080
+  lmdmdb:
+    image: mariadb:lts
+    environment:
+      MARIADB_ROOT_PASSWORD: 84*ùôi_ègfhkjkhky"n
+      MYSQL_DATABASE: lmdmdb
+      MYSQL_USER: lmdmdb_user
+      MYSQL_PASSWORD: 144mpoKKKJHoioio
+    secrets:
+      - lmdmdb_root_pwd
+      - lmdmdb_user_pwd
+    volumes:
+      - lmdmdb:/var/lib/mysql
+  lmdm:
+    image: php:8-alpine-xdebug
+    build:
+      context: .
+      dockerfile: Dockerfile
     working_dir: /var/www
-    command: php -S 0.0.0.0:8080 -t public
+    command: php -S 0.0.0.0:8081 -t public
     environment:
       docker: "true"
     ports:
-      - "8080:8080"
+      - "8081:8081"
     volumes:
       - .:/var/www
       - logs:/var/www/logs
+      - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

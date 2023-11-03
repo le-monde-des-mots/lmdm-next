@@ -6,6 +6,7 @@ use LmdmNext\Domain\Oidc\Client\ClientRepositoryInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Routing\RouteContext;
 
 class AuthorizeEndPoint implements AuthorizeEndPointInterface
 {
@@ -23,9 +24,16 @@ class AuthorizeEndPoint implements AuthorizeEndPointInterface
         $redirectUri = $request->getQueryParams()["redirect_uri"]??false;
         $codeChallenge = $request->getQueryParams()["code_challenge"]??false;
         $scope = $request->getQueryParams()["scope"]??false;
-        $state = $request->getQueryParams()["state"]??false;
+        $query = $request->getUri()->getQuery();
+        $scheme = $request->getUri()->getScheme();
+        $host = $request->getUri()->getHost();
+        $port = $request->getUri()->getPort();
+        $p = $port?':'.$port:'';
+        $routeParser = RouteContext::fromRequest($request)->getRouteParser();
+        $pathEndPoint = $routeParser->urlFor('signinForm');
+
         if(!($clientId && $redirectUri && $codeChallenge && $scope)
-            || (str_contains($scope, "openid") && str_contains($scope,"profile") && str_contains($scope, "userinfo")))
+            || !(str_contains($scope, "openid") && str_contains($scope,"profile") && str_contains($scope, "userinfo")))
         {
             $content = ["error" => "invalid request"];
             $response->getBody()->write(json_encode($content));
@@ -38,9 +46,9 @@ class AuthorizeEndPoint implements AuthorizeEndPointInterface
             return $response->withStatus(400)->withHeader("Content-Type", "application/json");
         }
         $uri = $request->getUri();
-        echo $uri;
-/*        return $response
-            ->withHeader("Location", "")
-            ->withStatus(302);*/
+
+     return $response
+            ->withHeader("Location", "$scheme://$host$p$pathEndPoint?$query")
+            ->withStatus(302);
     }
 }
